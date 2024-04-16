@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048Game", "2048Game.csproj", "{73C85A3C-AFE7-45B8-B780-AAA6529CFE6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048Console", "2048Console\2048Console.csproj", "{C39CE3E1-0EAD-4F79-839A-26398DCB01B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{73C85A3C-AFE7-45B8-B780-AAA6529CFE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73C85A3C-AFE7-45B8-B780-AAA6529CFE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73C85A3C-AFE7-45B8-B780-AAA6529CFE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73C85A3C-AFE7-45B8-B780-AAA6529CFE6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39CE3E1-0EAD-4F79-839A-26398DCB01B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39CE3E1-0EAD-4F79-839A-26398DCB01B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39CE3E1-0EAD-4F79-839A-26398DCB01B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39CE3E1-0EAD-4F79-839A-26398DCB01B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
