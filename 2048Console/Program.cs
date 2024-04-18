@@ -1,36 +1,48 @@
-﻿using _2048Game._2048Console.Classes;
+﻿using System.Numerics;
+using _2048Console.Application;
+using _2048Console.Classes;
 
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 32, 2, 32 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 4, 4, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 8, 0, 2 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 8, 0, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 8, 0, 0, 8 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 4, 0, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 4, 8, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 0, 16, 16 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 16, 0, 16 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 2, 0, 0, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 2, 0, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 0, 2, 0 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 0, 0, 0, 2 })));
-Console.WriteLine(string.Join(", ", ShiftRight(4, new int[] { 4, 2, 8, 2 })));
+var random = new Random();
 
-int[] ShiftRight(int size, int[] array)
+var gameState = IntSquareMatrix.Zeros(4);
+
+var initialElementXIndex = random.Next(0, 4);
+var initialElementYIndex = random.Next(0, 4);
+var initialElement = 2;
+
+gameState[initialElementXIndex, initialElementYIndex] = initialElement;
+
+
+Console.WriteLine("Press any key to start the game...");
+Console.ReadKey(true);
+
+Console.WriteLine("Game started");
+Console.WriteLine("Use arrows to play");
+Console.WriteLine("Press Z to exit");
+
+ConsoleKey lastUsedKey;
+List<Vector2> zerosCoordinates;
+Vector2 randomlyPickedZeroCoordinates;
+
+do
 {
-    int[] newArray = { 0, 0, 0, 0 };
-    int nonZeroIndex = size - 1;
+    Console.WriteLine(gameState.ToString());
 
-    for (int i = size - 1; i >= 0; i--)
+    lastUsedKey = Console.ReadKey(true).Key;
+
+    gameState = lastUsedKey switch
     {
-        if (array[i] != 0 && nonZeroIndex < size -1 && array[i] == newArray[nonZeroIndex + 1])
-        {
-            newArray[nonZeroIndex + 1] *= 2;
-        }
-        else if(array[i] != 0)
-        {
-            newArray[nonZeroIndex--] = array[i];
-        }
-    }
+        ConsoleKey.LeftArrow => IntSquareMatrixTransformer.ShiftLeft(gameState),
+        ConsoleKey.RightArrow => IntSquareMatrixTransformer.ShiftRight(gameState),
+        ConsoleKey.UpArrow => IntSquareMatrixTransformer.ShiftUp(gameState),
+        ConsoleKey.DownArrow => IntSquareMatrixTransformer.ShiftDown(gameState),
+        _ => gameState
+    };
 
-    return newArray;
-}
+    zerosCoordinates = gameState.ZerosCoordinates();
+    randomlyPickedZeroCoordinates = zerosCoordinates[random.Next(0, zerosCoordinates.Count() - 1)];
+
+    gameState[(int)randomlyPickedZeroCoordinates.X, (int)randomlyPickedZeroCoordinates.Y] = 2;
+} while (lastUsedKey != ConsoleKey.Z);
+
+Console.WriteLine("Game over!");

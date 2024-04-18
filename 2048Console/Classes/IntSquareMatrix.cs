@@ -1,4 +1,6 @@
-﻿namespace _2048Game._2048Console.Classes;
+﻿using System.Numerics;
+
+namespace _2048Console.Classes;
 
 public class IntSquareMatrix
 {
@@ -30,34 +32,27 @@ public class IntSquareMatrix
         _Elements = elements;
     }
 
-    public IntSquareMatrix Transpose()
+    public List<Vector2> ZerosCoordinates()
     {
-        var transpose = Zeros(Size);
+        var zerosCoordinates = new List<Vector2>();
 
         for (int i = 0; i < Size; i++)
         {
             for (int j = 0; j < Size; j++)
             {
-                transpose[i, j] = this[j, i];
+                if (this[i, j] == 0)
+                {
+                    zerosCoordinates.Add(new Vector2(i, j));
+                }
             }
         }
 
-        return transpose;
+        return zerosCoordinates;
     }
 
     public static IntSquareMatrix Zeros(int size)
     {
-        var elements = new int[size, size];
-
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                elements[i, j] = 0;
-            }
-        }
-
-        return new IntSquareMatrix(size, elements);
+        return new IntSquareMatrix(size, new int[size, size]);
     }
 
     public override string ToString()
@@ -75,27 +70,5 @@ public class IntSquareMatrix
         }
 
         return matrixString;
-    }
-
-    public static IntSquareMatrix Multiply(IntSquareMatrix A, IntSquareMatrix B)
-    {
-        if (A.Size != B.Size)
-        {
-            throw new ArithmeticException(
-                "Square matrixes A and B can't be multiplied, because their sizes are not equal");
-        }
-
-        var productMatrixSize = A.Size;
-        var product = Zeros(productMatrixSize);
-
-        for (int i = 0; i < productMatrixSize; i++)
-        {
-            for (int j = 0; j < productMatrixSize; j++)
-            {
-                product[i, j] += A[i, j] * B[j, i];
-            }
-        }
-
-        return product;
     }
 }
