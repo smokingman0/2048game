@@ -1,6 +1,14 @@
-﻿namespace _2048Game.ViewModels;
+﻿using _2048Game.Services;
+
+namespace _2048Game.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting => "Welcome to Avalonia!";
+    public MainWindowViewModel()
+    {
+        var service = new ToDoListService();
+        ToDoList = new ToDoListViewModel(service.GetItems());
+    }
+
+    public ToDoListViewModel ToDoList { get; }
 }
