@@ -50,11 +50,6 @@ public class IntSquareMatrix
         return zerosCoordinates;
     }
 
-    public static IntSquareMatrix Zeros(int size)
-    {
-        return new IntSquareMatrix(size, new int[size, size]);
-    }
-
     public override string ToString()
     {
         var matrixString = "";
@@ -70,5 +65,36 @@ public class IntSquareMatrix
         }
 
         return matrixString;
+    }
+
+    public static IntSquareMatrix Zeros(int size)
+    {
+        return new IntSquareMatrix(size, new int[size, size]);
+    }
+
+    public static bool operator ==(IntSquareMatrix A, IntSquareMatrix B)
+    {
+        if (A.Size != B.Size)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < A.Size; i++)
+        {
+            for (int j = 0; j < B.Size; j++)
+            {
+                if (A[i, j] != B[i, j])
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static bool operator !=(IntSquareMatrix A, IntSquareMatrix B)
+    {
+        return !(A == B);
     }
 }
