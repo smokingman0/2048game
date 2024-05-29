@@ -60,7 +60,7 @@ public class IntSquareMatrix
 
             for (int j = 0; j < Size; j++)
             {
-                matrixString += $"{this[i, j]} ";
+                matrixString += $"{this[i, j], 4} ";
             }
         }
 
